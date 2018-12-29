@@ -13,6 +13,11 @@ main {
   justify-content: space-around;
 }
 
+form {
+  width: 400px;
+  margin: auto;
+}
+
 h1 {
   font-size: 48px;
   text-align: center;
@@ -63,5 +68,27 @@ p {
 .isbn {
   font-size: 10px;
   font-style: italic;
+  background-color: rgb(89, 158, 158);
+}
+
+#search {
+  background-color: white;
+  height: 30px;
+  width: 300px;
+  font-size: 18px;
+}
+
+.radio {
+  margin: 10px 0 10px 0;
+}
+
+span {
+  font-size: 18px;
+}
+
+button {
+  height: 30px;
+  width: 150px;
+  font-size: 18px;
   background-color: rgb(89, 158, 158);
 }
