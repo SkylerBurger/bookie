@@ -1,0 +1,44 @@
+@import url(reset.css);
+
+* {
+  width: 900px;
+  background-color: bisque;
+}
+
+h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+li {
+
+}
+
+div.result{
+  width: 200px;
+  border: 1px solid black;
+  margin-bottom: 15px;
+}
+
+h3 {
+
+}
+
+h4{
+
+}
+
+img {
+  width: 150px;
+}
+
+p {
+  font-size: 12px;
+  width: 180px;
+}
+
+.isbn {
+  font-size: 10px;
+  font-style: italic;
+}

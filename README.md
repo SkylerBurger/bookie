@@ -32,13 +32,40 @@ An app for books
 ## Feature 3: Display Search Results
 
 ### Estimate of time needed to complete:
- 30 minutes
+ 60 minutes
 
 ### Start time:
  10:12AM
 
 ### Finish time:
- 
+ 10:57AM
 
 ### Actual time needed to complete:
+45 minutes
  
+## Feature 4: Error Handling
+
+### Estimate of time needed to complete:
+ 20 minutes
+
+### Start time:
+ 10:57AM
+
+### Finish time:
+11:00AM
+
+### Actual time needed to complete:
+3 minutes
+
+## Feature 5: Style the Book Application
+
+### Estimate of time needed to complete:
+ 60 minutes
+
+### Start time:
+11:00AM
+
+### Finish time:
+
+
+### Actual time needed to complete:
