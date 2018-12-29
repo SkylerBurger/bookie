@@ -7,6 +7,21 @@
   <title>Home</title>
 </head>
 <body>
-  
+  <form action="/searches" method="post">
+    <input type="text" name="search" placeholder="Type a Title or an Author" required>
+    <fieldset>
+      <label for="title">
+        <span>Title</span>
+        <input type="radio" name="search" value="title" required>
+      </label>
+    </fieldset>
+    <fieldset>
+      <label for="author">
+        <span>Author</span>
+        <input type="radio" name="search" value="author" required>
+      </label>
+    </fieldset>
+    <button type="submit">Ask Google!</button>
+  </form>
 </body>
 </html>
