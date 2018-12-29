@@ -3,17 +3,32 @@
 const express = require('express');
 const superagent = require('superagent');
 const app = express();
+const pg = require('pg');
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 const PORT = process.env.PORT || 3000;
 
+//=======================
+// Database - PostgresSQL
+//=======================
+
+const client = new pg.Client('postgres://localhost:5432/books_app');
+client.connect();
+
+client.on('error', err => console.log(err));
+
 app.get('/', home);
 app.post('/searches', search);
 
 function home(request, response){
-  response.render('pages/index');
+  let SQL = 'SELECT * FROM books;';
+  return client.query(SQL)
+    .then(data => {
+        response.render('pages/index', {data: data.rows});
+    })
+    .catch(err => response.render('pages/error', {err}));
 }
 
 function search(request, response){

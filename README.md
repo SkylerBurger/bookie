@@ -73,18 +73,18 @@ An app for books
 
 ___________________________________________________________________________________________________________
 
-# lab 12
+# Lab 12
 
-## Feature 1: 
+## Feature 1: Show all saved books when the application loads
 
 ### Estimate of time needed to complete:
  60 minutes
 
 ### Start time:
-11:00AM
+13:55
 
 ### Finish time:
-11:40AM
+14:51
 
 ### Actual time needed to complete:
-40 minutes
+56 minutes
