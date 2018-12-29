@@ -70,3 +70,21 @@ An app for books
 
 ### Actual time needed to complete:
 40 minutes
+
+___________________________________________________________________________________________________________
+
+# lab 12
+
+## Feature 1: 
+
+### Estimate of time needed to complete:
+ 60 minutes
+
+### Start time:
+11:00AM
+
+### Finish time:
+11:40AM
+
+### Actual time needed to complete:
+40 minutes
