@@ -9,10 +9,9 @@
 </head>
 <body>
   <h1>Here are your results:</h1>
-  <ul>
+  <main>
     <% books.forEach(book => { %>
-
-      <li>
+  
         <div class="result">
           <h3><%= book.title %></h3>
           <h4><%= book.author %></h4>
@@ -20,9 +19,9 @@
           <p><%= book.description %></p>
           <p class="isbn"><%= book.isbn %></p>
         </div>
-      </li>
-
+  
     <% }) %>
-  </ul>
+  </main>
+
 </body>
 </html>

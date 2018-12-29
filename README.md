@@ -66,6 +66,7 @@ An app for books
 11:00AM
 
 ### Finish time:
-
+11:40AM
 
 ### Actual time needed to complete:
+40 minutes
