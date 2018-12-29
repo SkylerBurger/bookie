@@ -16,41 +16,52 @@ main {
 h1 {
   font-size: 48px;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 20px 0 30px 0;
 }
 
-div.result{
+div.result {
   width: 200px;
   border: 1px solid black;
+  border-radius: 5px;
   margin-bottom: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 1px 2px 2px rgb(42, 42, 42);
+  background-color: rgb(89, 158, 158);
 }
 
 h3 {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
+  background-color: rgb(89, 158, 158);
 }
 
 h4{
   text-align: center;
   font-size: 18px;
-  margin-bottom: 10px;
+  font-style: italic;
+  margin: 10px 0 10px 0;
+  background-color: rgb(89, 158, 158);
 }
 
 img {
   display: block;
   width: 150px;
   margin: 0 auto 0 auto;
+  box-shadow: 2px 4px 4px rgb(42, 42, 42);
 }
 
 p {
   font-size: 14px;
   width: 180px;
-  margin: 10px auto 0 auto;
+  margin: 20px auto 0 auto;
   text-align: center;
+  background-color: rgb(89, 158, 158);
 }
 
 .isbn {
   font-size: 10px;
   font-style: italic;
+  background-color: rgb(89, 158, 158);
 }
