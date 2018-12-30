@@ -84,7 +84,20 @@ ________________________________________________________________________________
 13:55
 
 ### Finish time:
-14:51
+15:03
 
 ### Actual time needed to complete:
-56 minutes
+68 minutes
+
+## Feature 2: Book Detail View
+
+### Estimate of time needed to complete:
+ 60 minutes
+
+### Start time:
+15:03
+
+### Finish time:
+
+
+### Actual time needed to complete:

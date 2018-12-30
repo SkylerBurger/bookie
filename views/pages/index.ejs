@@ -8,35 +8,16 @@
   <title>Home</title>
 </head>
 <body>
-  <!-- <h1>Search the Google Books API!</h1>
-  <form action="/searches" method="post">
-    <input id="search" type="text" name="search" placeholder="Type a Title or an Author" required>
-    <fieldset>
-      <label for="title">
-        <span>Title</span>
-        <input class="radio" type="radio" name="search" value="title" required>
-      </label>
-    </fieldset>
-    <fieldset>
-      <label for="author">
-        <span>Author</span>
-        <input class="radio" type="radio" name="search" value="author" required>
-      </label>
-    </fieldset>
-    <button type="submit">Ask Google!</button>
-  </form> -->
+    <%- include('../partials/menu.ejs') %>
   <h1>Search History</h1>
   <h2>Number of Book Results: <%= data.length %> </h2>
   <main>
-
-
     <% data.forEach(book => { %>
       <div class="result">
         <h3><%= book.title %></h3>
         <h4><%= book.author %></h4>
         <img src=<%= book.image_url %>>
-        <p><%= book.description %></p>
-        <p class="isbn"><%= book.isbn %></p>
+        <a href="/books/<%= book.id%>">View Details</a>
       </div>
     <% }) %>
 </main>

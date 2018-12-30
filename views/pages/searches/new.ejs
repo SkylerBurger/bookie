@@ -8,6 +8,7 @@
   <title>Home</title>
 </head>
 <body>
+    <%- include('../../partials/menu.ejs') %>
   <h1>Search the Google Books API!</h1>
   <form action="/searches" method="post">
     <input id="search" type="text" name="search" placeholder="Type a Title or an Author" required>

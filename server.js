@@ -1,5 +1,9 @@
 'use strict';
 
+//=============
+// Dependencies
+//=============
+
 const express = require('express');
 const superagent = require('superagent');
 const app = express();
@@ -14,13 +18,23 @@ const PORT = process.env.PORT || 3000;
 // Database - PostgresSQL
 //=======================
 
-const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client('postgres://localhost:5432/books_app');
 client.connect();
 
 client.on('error', err => console.log(err));
 
+//=======
+// Routes
+//=======
+
 app.get('/', home);
+app.get('/form', form);
 app.post('/searches', search);
+app.get('/books/:books_id', bookDetail);
+
+//==========
+// Functions
+//==========
 
 function home(request, response){
   let SQL = 'SELECT * FROM books;';
@@ -29,6 +43,10 @@ function home(request, response){
         response.render('pages/index', {data: data.rows});
     })
     .catch(err => response.render('pages/error', {err}));
+}
+
+function form (request, response) {
+  response.render('pages/searches/new');
 }
 
 function search(request, response){
@@ -45,9 +63,18 @@ function search(request, response){
   return superagent.get(URL)
     .then( result => {
       let books = result.body.items.map(book =>  new Book(book));
-      response.render('pages/show', {books});
+      response.render('pages/searches/show', {books});
     })
     .catch(err => response.render('pages/error', {err}));
+}
+
+function bookDetail (response, request) {
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
+  let values = [request.params.books_id];
+  console.log(values);
+  return client.query(SQL, values)
+  .this(data => response.render('pages/books/detail', {details: data.rows[0]}))
+  .catch(err => response.render('pages/error', {err}));
 }
 
 app.listen(PORT, () => console.log(`APP is up on Port: ${PORT}`));
