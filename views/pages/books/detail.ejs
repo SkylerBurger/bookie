@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="../css/style.css">
-  <title>Document</title>
+  <title>Book Detail</title>
 </head>
 <body>
   <%- include('../../partials/menu.ejs') %>
+  <div class="current-page"><h2>Book Detail</h2></div>
   <main>
     <div class="result">
       <h3><%= details.title %></h3>
       <h4><%= details.author %></h4>
       <img src=<%= details.image_url %>>
       <p><%= details.description %></p>
-      <p class="isbn"><%= details.isbn %></p>
+      <p class="isbn"><%= details.isbnNumber %></p>
       <p class="isbn"><%= details.bookshelf %></p>
     </div>
   </main>
