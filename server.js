@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 // Database - PostgresSQL
 //=======================
 
-const client = new pg.Client('postgres://localhost:5432/books_app');
+const client = new pg.Client('postgres://skybur:enkidu@localhost:5432/books');
 client.connect();
 
 client.on('error', err => console.log(err));
@@ -68,13 +68,14 @@ function search(request, response){
     .catch(err => response.render('pages/error', {err}));
 }
 
-function bookDetail (response, request) {
+function bookDetail (request, response) {
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.books_id];
-  console.log(values);
   return client.query(SQL, values)
-  .this(data => response.render('pages/books/detail', {details: data.rows[0]}))
-  .catch(err => response.render('pages/error', {err}));
+    .then(data => {
+      response.render('pages/books/detail', {details: data.rows[0]});
+    })
+    .catch(err => response.render('pages/error', {err}));
 }
 
 app.listen(PORT, () => console.log(`APP is up on Port: ${PORT}`));
