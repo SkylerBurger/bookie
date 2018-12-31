@@ -30,6 +30,7 @@ client.on('error', err => console.log(err));
 app.get('/', home);
 app.get('/form', form);
 app.post('/searches', search);
+app.post('/save', saveBook);
 app.get('/books/:books_id', bookDetail);
 
 //==========
@@ -38,14 +39,15 @@ app.get('/books/:books_id', bookDetail);
 
 function home(request, response){
   let SQL = 'SELECT * FROM books;';
+
   return client.query(SQL)
     .then(data => {
-        response.render('pages/index', {data: data.rows});
+      response.render('pages/index', {data: data.rows});
     })
     .catch(err => response.render('pages/error', {err}));
 }
 
-function form (request, response) {
+function form(request, response) {
   response.render('pages/searches/new');
 }
 
@@ -55,7 +57,7 @@ function search(request, response){
   let URL = `https://www.googleapis.com/books/v1/volumes?q=`;
 
   if(searchType === 'title'){
-    URL += `+intitle:${query}`;
+    URL += `${query}`;
   } else if(searchType === 'author'){
     URL += `+inauthor:${query}`;
   }
@@ -63,14 +65,33 @@ function search(request, response){
   return superagent.get(URL)
     .then( result => {
       let books = result.body.items.map(book =>  new Book(book));
-      response.render('pages/searches/show', {books});
+      response.render('pages/searches/results', {books});
     })
     .catch(err => response.render('pages/error', {err}));
 }
 
-function bookDetail (request, response) {
+function saveBook(request, response){
+  let URL = `https://www.googleapis.com/books/v1/volumes?q=${request.body.isbn}`;
+
+  return superagent.get(URL)
+    .then(result => {
+      let book = new Book(result.body.items[0]);
+
+      let SQL = `INSERT INTO books
+                (author, title, isbnType, isbnNumber, image_url, description)
+                VALUES($1, $2, $3, $4, $5, $6)`
+
+      client.query(SQL, [book.author, book.title, book. isbnType, book.isbnNumber, book.image_url, book.description]);
+
+      response.render('pages/books/detail', {details: book});
+    })
+    .catch(err => response.render('pages/error', {err}));
+}
+
+function bookDetail(request, response) {
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.books_id];
+
   return client.query(SQL, values)
     .then(data => {
       response.render('pages/books/detail', {details: data.rows[0]});
@@ -92,5 +113,6 @@ const Book = function(data) {
   }, '');
   this.description = data.volumeInfo.description;
   this.image_url = data.volumeInfo.imageLinks.thumbnail;
-  this.isbn = `${data.volumeInfo.industryIdentifiers[0].type} ${data.volumeInfo.industryIdentifiers[0].identifier}`; 
+  this.isbnType = data.volumeInfo.industryIdentifiers[0].type;
+  this.isbnNumber = data.volumeInfo.industryIdentifiers[0].identifier;
 }
