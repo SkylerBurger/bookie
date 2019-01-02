@@ -83,7 +83,7 @@ function saveBook(request, response){
                 (author, title, isbnType, isbnNumber, image_url, description)
                 VALUES($1, $2, $3, $4, $5, $6)`
 
-      client.query(SQL, [book.author, book.title, book. isbnType, book.isbnNumber, book.image_url, book.description]);
+      client.query(SQL, [book.author, book.title, book.isbnType, book.isbnNumber, book.image_url, book.description]);
 
       response.render('pages/books/detail', {details: book});
     })
