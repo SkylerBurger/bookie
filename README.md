@@ -92,12 +92,27 @@ ________________________________________________________________________________
 ## Feature 2: Book Detail View
 
 ### Estimate of time needed to complete:
- 60 minutes
+60 minutes
 
 ### Start time:
 15:03
 
 ### Finish time:
+17:00
+
+### Actual time needed to complete:
+2 hours
+
+## Feature 3: Modifying API-provided Book Details
+
+### Estimate of time needed to complete:
+60 minutes
+
+### Start time:
+17:00
+
+### Finish time:
 
 
 ### Actual time needed to complete:
+2 hours

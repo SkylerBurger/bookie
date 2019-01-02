@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 // Database - PostgresSQL
 //=======================
 
-const client = new pg.Client('postgres://skybur:enkidu@localhost:5432/books');
+const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
 client.on('error', err => console.log(err));
