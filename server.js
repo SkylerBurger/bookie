@@ -8,6 +8,8 @@ const express = require('express');
 const superagent = require('superagent');
 const app = express();
 const pg = require('pg');
+require('dotenv').config();
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
