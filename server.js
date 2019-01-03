@@ -63,13 +63,21 @@ function search(request, response){
   } else if(searchType === 'author'){
     URL += `+inauthor:${query}`;
   }
-
+  
   return superagent.get(URL)
-    .then( result => {
-      let books = result.body.items.map(book =>  new Book(book));
-      response.render('pages/searches/results', {books});
+    .then(result => {
+      let books = [];
+      let limit = 40;
+      if(result.body.items.length < 40) limit = result.body.items.length;
+
+      for(let i = 0; i < limit; i++){
+        let book = new Book(result.body.items[i]);
+        books.push(book);
+      }
+      
+      response.render('pages/searches/results', {books})
     })
-    .catch(err => response.render('pages/error', {err}));
+    .catch(err => console.error(err));
 }
 
 function saveBook(request, response){
@@ -103,13 +111,20 @@ app.listen(PORT, () => console.log(`APP is up on Port: ${PORT}`));
 //=============
 
 const Book = function(data) {
-  this.title = data.volumeInfo.title;
-  this.author = data.volumeInfo.authors.reduce((accum, auth) => {
+  let volume = data.volumeInfo;
+  
+  volume.title ? this.title = volume.title : this.title = "Untitled";
+
+  volume.authors ? this.author = volume.authors.reduce((accum, auth) => {
     accum += auth + ' ';
     return accum;
-  }, '');
-  this.description = data.volumeInfo.description;
-  this.image_url = data.volumeInfo.imageLinks.thumbnail;
-  this.isbnType = data.volumeInfo.industryIdentifiers[0].type;
-  this.isbnNumber = data.volumeInfo.industryIdentifiers[0].identifier;
+  }, '') : this.author = 'Unknown';
+
+  volume.description ? this.description = volume.description : this.description = 'No Description Provided';
+
+  volume.imageLinks.thumbnail ? this.image_url = volume.imageLinks.thumbnail : this.image_url = "img/no-cover.png";
+  
+  volume.industryIdentifiers[0].type ? this.isbnType = volume.industryIdentifiers[0].type : this.isbnType = '';
+
+  volume.industryIdentifiers[0].identifier ? this.isbnNumber = volume.industryIdentifiers[0].identifier : this.isbnNumber = 'Unknown ISBN';
 }
