@@ -24,17 +24,17 @@ INSERT INTO books (
   'Sphere Packings',
   'ISBN_13',
   '9780387227801',
-  'http://books.google.com/books/content?id=AmcKBwAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api',
+  'http://books.google.com/books/content?id=AmcKBwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
   'Sphere packings is one of the most fascinating and challenging subjects in mathematics. In the course of centuries, many exciting results have been obtained, ingenious methods created, related challenging problems proposed, and many surprising connections with other subjects found. This book gives a full account of this fascinating subject, especially its local aspects, discrete aspects, and its proof methods. The book includes both classical and contemporary results and provides a full treatment of the subject.',
   'boring'
 ); 
 
 
 INSERT INTO books (
-  author,
+  author,tp://books.google.com/books/content?id=AmcKBwAAQBAJ&amp;printsec=frontcov
   title,
   isbnType,
-  isbnNumber,
+  isbnNumber,http://books.google.com/books/content?id=AmcKBwAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api
   image_url,
   description,
   bookshelf
