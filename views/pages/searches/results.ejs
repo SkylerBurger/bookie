@@ -19,12 +19,17 @@
           <h4><%= book.author %></h4>
           <img src=<%= book.image_url %>>
           <form action="/save" method="post">
-            <input id="isbn" name="isbn" type="text" style="display:none" value=<%= book.isbnNumber %>>
-            <button type="submit">Add to Collection</button>
+            <input name="title" type="hidden" value="<%= book.title %>">
+            <input name="author" type="hidden" value="<%= book.author %>">
+            <input name="description" type="hidden" value="<%= book.description %>">
+            <input name="image_url" type="hidden" value="<%= book.image_url %>">
+            <input name="isbnType" type="hidden" value="<%= book.isbnType %>">
+            <input name="isbnNumber" type="hidden" value="<%= book.isbnNumber %>">
+            <button type="submit" value="submit">Add to Collection</button>
           </form>
         </div>
   
-    <% }) %>
+    <% }); %>
   </main>
 
 </body>
