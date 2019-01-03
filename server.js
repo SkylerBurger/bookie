@@ -73,21 +73,16 @@ function search(request, response){
 }
 
 function saveBook(request, response){
-  let URL = `https://www.googleapis.com/books/v1/volumes?q=${request.body.isbn}`;
+  let SQL = `INSERT INTO books
+                (title, author, description, image_url, isbnType, isbnNumber)
+                VALUES($1, $2, $3, $4, $5, $6)`;
 
-  return superagent.get(URL)
-    .then(result => {
-      let book = new Book(result.body.items[0]);
-
-      let SQL = `INSERT INTO books
-                (author, title, isbnType, isbnNumber, image_url, description)
-                VALUES($1, $2, $3, $4, $5, $6)`
-
-      client.query(SQL, [book.author, book.title, book. isbnType, book.isbnNumber, book.image_url, book.description]);
-
-      response.render('pages/books/detail', {details: book});
+  return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbnType, request.body.isbnNumber])
+    .then( () => {
+      response.render('pages/books/detail', {details: request.body});
     })
-    .catch(err => response.render('pages/error', {err}));
+    .catch(err => console.error(err));
+
 }
 
 function bookDetail(request, response) {
