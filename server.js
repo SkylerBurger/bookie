@@ -63,32 +63,21 @@ function search(request, response){
   } else if(searchType === 'author'){
     URL += `+inauthor:${query}`;
   }
-  console.log('URL is: ' + URL);
   
   return superagent.get(URL)
     .then(result => {
       let books = [];
       let limit = 40;
       if(result.body.items.length < 40) limit = result.body.items.length;
-      console.log(limit);
+
       for(let i = 0; i < limit; i++){
         let book = new Book(result.body.items[i]);
         books.push(book);
       }
+      
       response.render('pages/searches/results', {books})
     })
     .catch(err => console.error(err));
-  
-  // return superagent.get(URL)
-  //   .then( result => {
-  //     console.log(result.body.items);
-  //     return result.body.items.map(book => new Book(book))
-  //       .then(() => {
-  //         response.render('pages/searches/results', {books});
-  //       })
-  //       .catch(err => console.error(err));
-  //   })
-  //   .catch(err => response.render('pages/error', {err}));
 }
 
 function saveBook(request, response){
