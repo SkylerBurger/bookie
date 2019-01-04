@@ -34,6 +34,7 @@ app.get('/form', form);
 app.post('/searches', search);
 app.post('/save', saveBook);
 app.get('/books/:books_id', bookDetail);
+app.get('/info/:books_id', infoDetail);
 
 //==========
 // Functions
@@ -51,6 +52,17 @@ function home(request, response){
 
 function form(request, response) {
   response.render('pages/searches/new');
+}
+
+function infoDetail (request, response) {
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
+  let values = [request.params.books_id];
+
+  return client.query(SQL,values)
+    .then(data => {
+      response.render('pages/books/edit', {details: data.rows[0]});
+    })
+    .catch(err => response.render('pages/error', {err}));
 }
 
 function search(request, response){
@@ -90,7 +102,6 @@ function saveBook(request, response){
       response.render('pages/books/detail', {details: request.body});
     })
     .catch(err => console.error(err));
-
 }
 
 function bookDetail(request, response) {
