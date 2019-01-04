@@ -178,6 +178,15 @@ label span {
   margin-left: 15px;
 }
 
+.edit {
+  display: none;
+  margin: auto;
+}
+
+
+
+
+
 /*
 .isbn {
   font-size: 10px;
