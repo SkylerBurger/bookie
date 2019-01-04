@@ -24,8 +24,8 @@
             <input name="author" type="hidden" value="<%= book.author %>">
             <input name="description" type="hidden" value="<%= book.description %>">
             <input name="image_url" type="hidden" value="<%= book.image_url %>">
-            <input name="isbnType" type="hidden" value="<%= book.isbnType %>">
-            <input name="isbnNumber" type="hidden" value="<%= book.isbnNumber %>">
+            <input name="isbn_type" type="hidden" value="<%= book.isbn_type %>">
+            <input name="isbn_number" type="hidden" value="<%= book.isbn_number %>">
             <button type="submit" value="submit" class="add">Add to Collection</button>
           </form>
           <button class="editForm" value="<%= book.isbnNumber %>">Edit Entry</button>
@@ -34,9 +34,9 @@
             <input name="author" type="text" placeholder="Author" value="<%= book.author %>" class="edit">
             <input name="description" type="text" placeholder="Description" value="<%= book.description %>" class="edit <%= book.isbnNumber %>">
             <input name="image_url" type="text" placeholder="Image URL" value="<%= book.image_url %>" class="edit <%= book.isbnNumber %>">
-            <input name="isbnType" type="text" placeholder="ISBN Type" value="<%= book.isbnType %>" class="edit <%= book.isbnNumber %>">
-            <input name="isbnNumber" type="text" placeholder="ISBN Number" value="<%= book.isbnNumber %>" class="edit <%= book.isbnNumber %>">
-            <input name="bookshelf" type="text" placeholder="Bookshelf" class="edit <%= book.isbnNumber %>">
+            <input name="isbn_type" type="text" placeholder="ISBN Type" value="<%= book.isbn_type %>" class="edit <%= book.isbnNumber %>">
+            <input name="isbn_number" type="text" placeholder="ISBN Number" value="<%= book.isbn_number %>" class="edit <%= book.isbnNumber %>">
+            <input name="bookshelf" type="text" placeholder="Bookshelf" class="edit <%= book.isbn_number %>">
             <button type="submit" value="submit" class="edit">Add to Collection</button>
           </form>
           
