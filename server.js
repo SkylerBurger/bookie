@@ -8,11 +8,22 @@ const express = require('express');
 const superagent = require('superagent');
 const app = express();
 const pg = require('pg');
+const methodOverride = require('method-override');
 require('dotenv').config();
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+app.use(methodOverride((req, res) => {
+  if(req.body && typeof req.body === 'object' && '_method' in req.body){
+    let method = req.body._method;
+    delete req.body._method;
+    console.log(method);
+    return method;
+  }
+  console.log('Did not change');
+}));
 app.set('view engine', 'ejs');
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -34,6 +45,8 @@ app.get('/form', form);
 app.post('/searches', search);
 app.post('/save', saveBook);
 app.get('/books/:books_id', bookDetail);
+app.delete('/books/:books_id', deleteBook);
+app.get('/info/:books_id', infoDetail);
 
 //==========
 // Functions
@@ -51,6 +64,17 @@ function home(request, response){
 
 function form(request, response) {
   response.render('pages/searches/new');
+}
+
+function infoDetail (request, response) {
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
+  let values = [request.params.books_id];
+
+  return client.query(SQL,values)
+    .then(data => {
+      response.render('pages/books/edit', {details: data.rows[0]});
+    })
+    .catch(err => response.render('pages/error', {err}));
 }
 
 function search(request, response){
@@ -90,7 +114,16 @@ function saveBook(request, response){
       response.render('pages/books/detail', {details: request.body});
     })
     .catch(err => console.error(err));
+}
 
+function deleteBook(request, response){
+  let SQL = `DELETE FROM books WHERE id=$1`;
+  let values = [request.params.books_id];
+  return client.query(SQL, values)
+    .then(result => {
+      response.redirect('/');
+    })
+    .catch(err => console.error(err));
 }
 
 function bookDetail(request, response) {

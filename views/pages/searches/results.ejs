@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
   
   <title>Search Results</title>
@@ -25,12 +26,32 @@
             <input name="image_url" type="hidden" value="<%= book.image_url %>">
             <input name="isbnType" type="hidden" value="<%= book.isbnType %>">
             <input name="isbnNumber" type="hidden" value="<%= book.isbnNumber %>">
-            <button type="submit" value="submit">Add to Collection</button>
+            <button type="submit" value="submit" class="add">Add to Collection</button>
           </form>
+          <button class="editForm" value="<%= book.isbnNumber %>">Edit Entry</button>
+          <form action="/save" method="post" class="edit <%= book.isbnNumber %>">
+            <input name="title" type="text" placeholder="Title" value="<%= book.title %>" class="edit <%= book.isbnNumber %>">
+            <input name="author" type="text" placeholder="Author" value="<%= book.author %>" class="edit">
+            <input name="description" type="text" placeholder="Description" value="<%= book.description %>" class="edit <%= book.isbnNumber %>">
+            <input name="image_url" type="text" placeholder="Image URL" value="<%= book.image_url %>" class="edit <%= book.isbnNumber %>">
+            <input name="isbnType" type="text" placeholder="ISBN Type" value="<%= book.isbnType %>" class="edit <%= book.isbnNumber %>">
+            <input name="isbnNumber" type="text" placeholder="ISBN Number" value="<%= book.isbnNumber %>" class="edit <%= book.isbnNumber %>">
+            <input name="bookshelf" type="text" placeholder="Bookshelf" class="edit <%= book.isbnNumber %>">
+            <button type="submit" value="submit" class="edit">Add to Collection</button>
+          </form>
+          
         </div>
   
     <% }); %>
   </main>
-
+  <script>
+    $('.editForm').on('click', function() {
+      let selection = $(this).val();
+      $('.editForm').hide();
+      $('.add').hide();
+      $('.edit').css('display', 'block');
+      $('.edit').css('margin', 'auto');
+    });
+  </script>
 </body>
 </html>

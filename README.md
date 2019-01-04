@@ -116,3 +116,18 @@ ________________________________________________________________________________
 
 ### Actual time needed to complete:
 2 hours
+
+# Lab 13
+
+## Feature 1: Update Book
+
+### Estimate of time needed to complete:
+60 minutes
+
+### Start time:
+18:46
+
+### Finish time:
+
+
+### Actual time needed to complete:

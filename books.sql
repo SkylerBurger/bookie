@@ -31,10 +31,10 @@ INSERT INTO books (
 
 
 INSERT INTO books (
-  author,tp://books.google.com/books/content?id=AmcKBwAAQBAJ&amp;printsec=frontcov
+  author,
   title,
   isbnType,
-  isbnNumber,http://books.google.com/books/content?id=AmcKBwAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api
+  isbnNumber,
   image_url,
   description,
   bookshelf
