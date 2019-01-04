@@ -21,7 +21,9 @@
         <input name="details" type="text" value="<%= details.description %>" placeholder="Description"/>
         <label for="isbnNumber">ISBN Number</label>
         <input name="isbnNumber" type="text" value="<%= details.isbnNumber %>" placeholder="ISBN Number"/>
-        <option value="default">Choose Book Shelf</option>
+        <select name="bookshelf">
+          <option><%= details.bookshelf %></option>
+        </select>
         <input type="submit">
       </form>
     </div>
