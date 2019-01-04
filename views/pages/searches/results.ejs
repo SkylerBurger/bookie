@@ -13,27 +13,28 @@
   <div class="current-page"><h2>Search Results</h2></div>
   
   <main>
+    <% let i = 0; %>
     <% books.forEach(book => { %>
       <div class="result">
         <h3><%= book.title %></h3>
         <h4><%= book.author %></h4>
         <img src=<%= book.image_url %>>
         
-        <button class="editForm" value="<%= book.isbn_number %>">Select this Book</button>
+        <button class="editForm" value="<%= i %>">Select this Book</button>
         
-        <form action="/save" method="post" class="<%= book.isbn_number %> edit">
-          <input name="title" type="text" placeholder="Title" value="<%= book.title %>" class="<%= book.isbn_number %> edit">
-          <input name="author" type="text" placeholder="Author" value="<%= book.author %>" class="<%= book.isbn_number %> edit">
-          <input name="description" type="text" placeholder="Description" value="<%= book.description %>" class="<%= book.isbn_number %> edit">
-          <input name="image_url" type="text" placeholder="Image URL" value="<%= book.image_url %>" class="<%= book.isbn_number %> edit">
-          <input name="isbn_type" type="text" placeholder="ISBN Type" value="<%= book.isbn_type %>" class="<%= book.isbn_number %> edit">
-          <input name="isbn_number" type="text" placeholder="ISBN Number" value="<%= book.isbn_number %>" class="<%= book.isbn_number %> edit">
-          <input name="bookshelf" type="text" placeholder="Bookshelf" class="<%= book.isbn_number %> edit">
+        <form action="/save" method="post" class="<%= i %> edit">
+          <input name="title" type="text" placeholder="Title" value="<%= book.title %>" class="<%= i %> edit">
+          <input name="author" type="text" placeholder="Author" value="<%= book.author %>" class="<%= i %> edit">
+          <input name="description" type="text" placeholder="Description" value="<%= book.description %>" class="<%= i %> edit">
+          <input name="image_url" type="text" placeholder="Image URL" value="<%= book.image_url %>" class="<%= i %> edit">
+          <input name="isbn_type" type="text" placeholder="ISBN Type" value="<%= book.isbn_type %>" class="<%= i %> edit">
+          <input name="isbn_number" type="text" placeholder="ISBN Number" value="<%= book.isbn_number %>" class="<%= i %> edit">
+          <input name="bookshelf" type="text" placeholder="Bookshelf" class="<%= i %> edit">
           <button type="submit" value="submit" class="edit">Add to Collection</button>
         </form>
         
       </div>
-      
+        <% i++ %>
       <% }); %>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
