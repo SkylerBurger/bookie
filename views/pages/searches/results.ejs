@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
   
   <title>Search Results</title>
@@ -12,45 +11,39 @@
 <body>
   <%- include('../../partials/menu.ejs') %>
   <div class="current-page"><h2>Search Results</h2></div>
-
+  
   <main>
     <% books.forEach(book => { %>
-        <div class="result">
-          <h3><%= book.title %></h3>
-          <h4><%= book.author %></h4>
-          <img src=<%= book.image_url %>>
-          <form action="/save" method="post">
-            <input name="title" type="hidden" value="<%= book.title %>">
-            <input name="author" type="hidden" value="<%= book.author %>">
-            <input name="description" type="hidden" value="<%= book.description %>">
-            <input name="image_url" type="hidden" value="<%= book.image_url %>">
-            <input name="isbn_type" type="hidden" value="<%= book.isbn_type %>">
-            <input name="isbn_number" type="hidden" value="<%= book.isbn_number %>">
-            <button type="submit" value="submit" class="add">Add to Collection</button>
-          </form>
-          <button class="editForm" value="<%= book.isbnNumber %>">Edit Entry</button>
-          <form action="/save" method="post" class="edit <%= book.isbnNumber %>">
-            <input name="title" type="text" placeholder="Title" value="<%= book.title %>" class="edit <%= book.isbnNumber %>">
-            <input name="author" type="text" placeholder="Author" value="<%= book.author %>" class="edit">
-            <input name="description" type="text" placeholder="Description" value="<%= book.description %>" class="edit <%= book.isbnNumber %>">
-            <input name="image_url" type="text" placeholder="Image URL" value="<%= book.image_url %>" class="edit <%= book.isbnNumber %>">
-            <input name="isbn_type" type="text" placeholder="ISBN Type" value="<%= book.isbn_type %>" class="edit <%= book.isbnNumber %>">
-            <input name="isbn_number" type="text" placeholder="ISBN Number" value="<%= book.isbn_number %>" class="edit <%= book.isbnNumber %>">
-            <input name="bookshelf" type="text" placeholder="Bookshelf" class="edit <%= book.isbn_number %>">
-            <button type="submit" value="submit" class="edit">Add to Collection</button>
-          </form>
-          
-        </div>
-  
-    <% }); %>
-  </main>
-  <script>
-    $('.editForm').on('click', function() {
-      let selection = $(this).val();
-      $('.editForm').hide();
-      $('.add').hide();
-      $('.edit').css('display', 'block');
-      $('.edit').css('margin', 'auto');
+      <div class="result">
+        <h3><%= book.title %></h3>
+        <h4><%= book.author %></h4>
+        <img src=<%= book.image_url %>>
+        
+        <button class="editForm" value="<%= book.isbn_number %>">Select this Book</button>
+        
+        <form action="/save" method="post" class="<%= book.isbn_number %> edit">
+          <input name="title" type="text" placeholder="Title" value="<%= book.title %>" class="<%= book.isbn_number %> edit">
+          <input name="author" type="text" placeholder="Author" value="<%= book.author %>" class="<%= book.isbn_number %> edit">
+          <input name="description" type="text" placeholder="Description" value="<%= book.description %>" class="<%= book.isbn_number %> edit">
+          <input name="image_url" type="text" placeholder="Image URL" value="<%= book.image_url %>" class="<%= book.isbn_number %> edit">
+          <input name="isbn_type" type="text" placeholder="ISBN Type" value="<%= book.isbn_type %>" class="<%= book.isbn_number %> edit">
+          <input name="isbn_number" type="text" placeholder="ISBN Number" value="<%= book.isbn_number %>" class="<%= book.isbn_number %> edit">
+          <input name="bookshelf" type="text" placeholder="Bookshelf" class="<%= book.isbn_number %> edit">
+          <button type="submit" value="submit" class="edit">Add to Collection</button>
+        </form>
+        
+      </div>
+      
+      <% }); %>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+      $('.editForm').on('click', function() {
+      let selectionClass = "." + $(this).val();
+      console.log(selectionClass);
+      $(this).hide();
+      $(`${selectionClass}`).css('display', 'block');
+      // $(`input[class = "${selection}]`).css('margin', 'auto');
     });
   </script>
 </body>

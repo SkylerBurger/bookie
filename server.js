@@ -110,7 +110,6 @@ function bookDetail(request, response) {
 
   return client.query(SQL, values)
     .then(data => {
-      console.log(data.rows[0])
       response.render('pages/books/detail', {details: data.rows[0]});
     })
     .catch(err => response.render('pages/error', {err}));
