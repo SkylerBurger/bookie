@@ -141,10 +141,25 @@ form.new button {
   form.new button:hover {
     background-color: rgb(126, 209, 177);
     box-shadow: 2px 4px 4px black;
-    }
+  }
 
   div.result button:active, 
   form.new button:active {
+    position: relative;
+    top: 2px;
+    box-shadow: none;
+  }
+
+button.danger {
+  background-color: rgb(207, 174, 174) !important;
+}
+
+button.danger:hover {
+    background-color: rgb(209, 126, 126) !important;
+    box-shadow: 2px 4px 4px black;
+  }
+
+  button.danger:active {
     position: relative;
     top: 2px;
     box-shadow: none;

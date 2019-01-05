@@ -8,11 +8,22 @@ const express = require('express');
 const superagent = require('superagent');
 const app = express();
 const pg = require('pg');
+const methodOverride = require('method-override');
 require('dotenv').config();
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+app.use(methodOverride((req, res) => {
+  if(req.body && typeof req.body === 'object' && '_method' in req.body){
+    let method = req.body._method;
+    delete req.body._method;
+    console.log(method);
+    return method;
+  }
+  console.log('Did not change');
+}));
 app.set('view engine', 'ejs');
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -34,7 +45,9 @@ app.get('/form', form);
 app.post('/searches', search);
 app.post('/save', saveBook);
 app.get('/books/:books_id', bookDetail);
-app.get('/info/:books_id', infoDetail);
+app.delete('/books/:books_id', deleteBook);
+app.get('/update/:books_id', editBook);
+app.put('/update/:books_id', updateBook)
 
 //==========
 // Functions
@@ -54,15 +67,32 @@ function form(request, response) {
   response.render('pages/searches/new');
 }
 
-function infoDetail (request, response) {
+function editBook(request, response) {
+  let shelfSQL = 'SELECT DISTINCT bookshelf FROM books';
+  let shelfData = [];
+  client.query(shelfSQL)
+    .then(result => {
+      shelfData = [...result.rows];
+    })
+    .catch(err => console.error(err));
+
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.books_id];
-
+  
   return client.query(SQL,values)
-    .then(data => {
-      response.render('pages/books/edit', {details: data.rows[0]});
-    })
-    .catch(err => response.render('pages/error', {err}));
+  .then(data => {
+    response.render('pages/books/edit', {details: data.rows[0], shelves: shelfData});
+  })
+  .catch(err => response.render('pages/error', {err}));
+}
+
+function updateBook(request, response){
+  // let SQL2 = 'SELECT DISTINCT bookshelf FROM books;';
+  // let bookData = client.query(SQL,values);
+  // let bookshelves = client.query(SQL2,[]);
+  // console.log(bookshelves.rows[0]);
+  // return response.render('/pages/books/detail', {details: bookData.rows[0], shelves: bookshelves.rows[0]});
+
 }
 
 function search(request, response){
@@ -104,10 +134,20 @@ function saveBook(request, response){
     .catch(err => console.error(err));
 }
 
+function deleteBook(request, response){
+  let SQL = `DELETE FROM books WHERE id=$1`;
+  let values = [request.params.books_id];
+  return client.query(SQL, values)
+    .then(result => {
+      response.redirect('/');
+    })
+    .catch(err => console.error(err));
+}
+
 function bookDetail(request, response) {
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.books_id];
-
+  
   return client.query(SQL, values)
     .then(data => {
       response.render('pages/books/detail', {details: data.rows[0]});
