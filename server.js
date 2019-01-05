@@ -8,11 +8,22 @@ const express = require('express');
 const superagent = require('superagent');
 const app = express();
 const pg = require('pg');
+const methodOverride = require('method-override');
 require('dotenv').config();
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+app.use(methodOverride((req, res) => {
+  if(req.body && typeof req.body === 'object' && '_method' in req.body){
+    let method = req.body._method;
+    delete req.body._method;
+    console.log(method);
+    return method;
+  }
+  console.log('Did not change');
+}));
 app.set('view engine', 'ejs');
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -34,6 +45,7 @@ app.get('/form', form);
 app.post('/searches', search);
 app.post('/save', saveBook);
 app.get('/books/:books_id', bookDetail);
+app.delete('/books/:books_id', deleteBook);
 app.put('/update/:books_id', updateBook);
 
 //==========
@@ -106,6 +118,16 @@ function saveBook(request, response){
   return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbn_type, request.body.isbn_number])
     .then( () => {
       response.render('pages/books/detail', {details: request.body});
+    })
+    .catch(err => console.error(err));
+}
+
+function deleteBook(request, response){
+  let SQL = `DELETE FROM books WHERE id=$1`;
+  let values = [request.params.books_id];
+  return client.query(SQL, values)
+    .then(result => {
+      response.redirect('/');
     })
     .catch(err => console.error(err));
 }

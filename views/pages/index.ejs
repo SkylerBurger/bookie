@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+        <form action="/books/<%= book.id %>" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="delete">
+        </form>
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
