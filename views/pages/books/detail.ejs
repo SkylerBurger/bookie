@@ -24,7 +24,8 @@
             <p>SHELF: <%= details.bookshelf %></p>
         </div>
 
-        <form action="/update/<%= details.id %>" method="PUT">
+        <form action="/update/<%= details.id %>" method="POST">
+          <input type="hidden" name="_method" value="PUT">
           <button type="submit">Update Book</a>
         </form>
       

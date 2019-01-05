@@ -21,7 +21,7 @@
           <h4><%= book.author %></h4>
           <img src=<%= book.image_url %>>
 
-          <form action="/books/<%= book.id %>" method=POST>
+          <form action="/books/<%= book.id %>" method="GET">
             <input type="hidden" name="_method" value="PUT">
             <button type="submit" value="<%= book.id %>">View Details</button>
           </form>
