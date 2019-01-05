@@ -25,14 +25,13 @@
         <form action="/save" method="post" class="<%= i %> edit">
           <input name="title" type="text" placeholder="Title" value="<%= book.title %>" class="<%= i %> edit">
           <input name="author" type="text" placeholder="Author" value="<%= book.author %>" class="<%= i %> edit">
-          <input name="description" type="text" placeholder="Description" value="<%= book.description %>" class="<%= i %> edit">
+          <textarea name="description" placeholder="Description" class="<%= i %> edit text"><%= book.description %></textarea>
           <input name="image_url" type="text" placeholder="Image URL" value="<%= book.image_url %>" class="<%= i %> edit">
           <input name="isbn_type" type="text" placeholder="ISBN Type" value="<%= book.isbn_type %>" class="<%= i %> edit">
           <input name="isbn_number" type="text" placeholder="ISBN Number" value="<%= book.isbn_number %>" class="<%= i %> edit">
           <input name="bookshelf" type="text" placeholder="Bookshelf" class="<%= i %> edit">
           <button type="submit" value="submit" class="edit">Add to Collection</button>
         </form>
-        
       </div>
         <% i++ %>
       <% }); %>
@@ -40,12 +39,11 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
       $('.editForm').on('click', function() {
-      let selectionClass = "." + $(this).val();
-      console.log(selectionClass);
-      $(this).hide();
-      $(`${selectionClass}`).css('display', 'block');
-      // $(`input[class = "${selection}]`).css('margin', 'auto');
-    });
+        let selectionClass = "." + $(this).val();
+        console.log(selectionClass);
+        $(this).hide();
+        $(`${selectionClass}`).css('display', 'block');
+      });
   </script>
 </body>
 </html>
