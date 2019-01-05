@@ -124,12 +124,12 @@ function search(request, response){
 
 function saveBook(request, response){
   let SQL = `INSERT INTO books
-                (title, author, description, image_url, isbn_type, isbn_number)
-                VALUES($1, $2, $3, $4, $5, $6)
+                (title, author, description, image_url, isbn_type, isbn_number, bookshelf)
+                VALUES($1, $2, $3, $4, $5, $6, $7)
                 RETURNING id`;
                 // Need to return ID and add it to req.body so next page can use update button
 
-  return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbn_type, request.body.isbn_number])
+  return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbn_type, request.body.isbn_number, request.body.bookshelf])
     .then( result => {
       response.render('pages/books/detail', {details: request.body, id: result.rows[0].id});
     })
