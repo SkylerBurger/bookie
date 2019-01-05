@@ -46,7 +46,8 @@ app.post('/searches', search);
 app.post('/save', saveBook);
 app.get('/books/:books_id', bookDetail);
 app.delete('/books/:books_id', deleteBook);
-app.put('/update/:books_id', updateBook);
+app.get('/update/:books_id', editBook);
+app.put('/update/:books_id', updateBook)
 
 //==========
 // Functions
@@ -66,21 +67,32 @@ function form(request, response) {
   response.render('pages/searches/new');
 }
 
-function updateBook (request, response) {
-  console.log('something???')
+function editBook(request, response) {
+  let shelfSQL = 'SELECT DISTINCT bookshelf FROM books';
+  let shelfData = [];
+  client.query(shelfSQL)
+    .then(result => {
+      shelfData = [...result.rows];
+    })
+    .catch(err => console.error(err));
+
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.books_id];
+  
+  return client.query(SQL,values)
+  .then(data => {
+    response.render('pages/books/edit', {details: data.rows[0], shelves: shelfData});
+  })
+  .catch(err => response.render('pages/error', {err}));
+}
+
+function updateBook(request, response){
   // let SQL2 = 'SELECT DISTINCT bookshelf FROM books;';
   // let bookData = client.query(SQL,values);
   // let bookshelves = client.query(SQL2,[]);
   // console.log(bookshelves.rows[0]);
   // return response.render('/pages/books/detail', {details: bookData.rows[0], shelves: bookshelves.rows[0]});
 
-  return client.query(SQL,values)
-    .then(data => {
-      response.render('pages/books/edit', {details: data.rows[0]});
-    })
-    .catch(err => response.render('pages/error', {err}));
 }
 
 function search(request, response){
