@@ -34,7 +34,7 @@ app.get('/form', form);
 app.post('/searches', search);
 app.post('/save', saveBook);
 app.get('/books/:books_id', bookDetail);
-app.get('/update/:books_id', updateBook);
+app.put('/update/:books_id', updateBook);
 
 //==========
 // Functions

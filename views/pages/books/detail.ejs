@@ -21,7 +21,9 @@
             <p>ISBN: <%= details.isbn_number %></p>
             <p>SHELF: <%= details.bookshelf %></p>
         </div>
-        <a href="/info/<%= details.id%>">Update Book</a>
+        <form action="/update/<%= details.id %>" method="PUT">
+          <button type="submit">Update Book</a>
+        </form>
       </div>  
     </main>
 
