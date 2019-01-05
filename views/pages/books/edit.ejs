@@ -12,21 +12,17 @@
     <main>
       <div class="result">
         <form action="/update/<%= details.id %>" method="POST">
-          <legend>Update Info</legend>
+          <h3 class="update">Update Info</h3>
 
-          <label for="title">Title</label>
-          <input name="title" type="text" value="<%= details.title %>" placeholder="Title"/>
+          <input name="title" type="text" value="<%= details.title %>" placeholder="Title" class="update"/>
           
-          <label for="author">Author</label>
-          <input name="author" type="text" value="<%= details.author %>" placeholder="Author"/>
+          <input name="author" type="text" value="<%= details.author %>" placeholder="Author" class="update"/>
           
-          <label for="description">Description</label>
-          <textarea name="description" placeholder="Description"><%= details.description %></textarea>
+          <textarea name="description" placeholder="Description" class="update"><%= details.description %></textarea>
           
-          <label for="isbn_number">ISBN Number</label>
-          <input name="isbn_number" type="text" value="<%= details.isbn_number %>" placeholder="ISBN Number"/>
+          <input name="isbn_number" type="text" value="<%= details.isbn_number %>" placeholder="ISBN Number" class="update"/>
           
-          <select name="bookshelf">
+          <select name="bookshelf" class="update">
             <% let uniqueShelf = []; %>
             <% shelves.forEach(shelf => { %>
               <% if(!uniqueShelf.includes(shelf)) uniqueShelf.push(shelf); %>
@@ -34,7 +30,7 @@
 
             <% uniqueShelf.forEach(shelf => { %>
               <% if(shelf.bookshelf != null && shelf.bookshelf !== ''){ %>
-                <option><%= shelf.bookshelf %></option>
+                <option class="update"><%= shelf.bookshelf %></option>
               <% } %>
 
             <% }); %>
