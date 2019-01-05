@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/style.css">
-  <title>Collection</title>
-</head>
-<body>
-  <%- include('../partials/menu.ejs') %>
-  <div class="current-page"><h2>Collection</h2></div>
-
-  <main>
-    <% data.forEach(book => { %>
-      <div class="result">
-        <h3><%= book.title %></h3>
-        <h4><%= book.author %></h4>
-        <img src=<%= book.image_url %>>
-        <a href="/books/<%= book.id%>">View Details</a>
-      </div>
-    <% }) %>
-</main>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Collection</title>
+  </head>
+  <body>
+    <%- include('../partials/menu.ejs') %>
+    <div class="current-page"><h2>Collection: <%= data.length %> Book(s)</h2></div>
+    <main>
+      <% data.forEach(book => { %>
+        <div class="result">
+          <h3><%= book.title %></h3>
+          <h4><%= book.author %></h4>
+          <img src=<%= book.image_url %>>
+          <button type="submit" class="view" value="<%= book.id %>">View Details</button>
+        </div>
+      <% }) %>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+      $('.view').on('click', function() {
+        let url = "/books/";
+        url += $(this).val();
+        $(location).attr('href', url);
+      });
+    </script>
+  </body>
 </html>
