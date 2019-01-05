@@ -14,15 +14,14 @@
     <main>
       <form class="new" action="/searches" method="post">
         <input class="text" type="text" name="search" placeholder="Type a Title or an Author" required>
-        <fieldset>
+        <fieldset> Search Type:
           <label for="title">
-            <input class="radio" type="radio" name="search" value="title" required>
+            <input id="title" class="radio" type="radio" name="search" value="title" required>
             <span>Title</span>
           </label>
-        </fieldset>
-        <fieldset>
+        
           <label for="author">
-            <input class="radio" type="radio" name="search" value="author" required>
+            <input id="author" class="radio" type="radio" name="search" value="author" required>
             <span>Author</span>
           </label>
         </fieldset>

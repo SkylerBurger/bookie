@@ -79,8 +79,8 @@ function search(request, response){
   return superagent.get(URL)
     .then(result => {
       let books = [];
-      let limit = 40;
-      if(result.body.items.length < 40) limit = result.body.items.length;
+      let limit = 10;
+      if(result.body.items.length < 10) limit = result.body.items.length;
 
       for(let i = 0; i < limit; i++){
         let book = new Book(result.body.items[i]);
@@ -94,10 +94,10 @@ function search(request, response){
 
 function saveBook(request, response){
   let SQL = `INSERT INTO books
-                (title, author, description, image_url, isbnType, isbnNumber)
+                (title, author, description, image_url, isbn_type, isbn_number)
                 VALUES($1, $2, $3, $4, $5, $6)`;
 
-  return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbnType, request.body.isbnNumber])
+  return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbn_type, request.body.isbn_number])
     .then( () => {
       response.render('pages/books/detail', {details: request.body});
     })
@@ -124,18 +124,30 @@ app.listen(PORT, () => console.log(`APP is up on Port: ${PORT}`));
 const Book = function(data) {
   let volume = data.volumeInfo;
   
-  volume.title ? this.title = volume.title : this.title = "Untitled";
+  volume.title ? 
+  this.title = volume.title : 
+  this.title = "Untitled";
 
-  volume.authors ? this.author = volume.authors.reduce((accum, auth) => {
+  volume.authors ? 
+  this.author = volume.authors.reduce((accum, auth) => {
     accum += auth + ' ';
     return accum;
-  }, '') : this.author = 'Unknown';
+  }, '') : 
+  this.author = 'Unknown';
 
-  volume.description ? this.description = volume.description : this.description = 'No Description Provided';
+  volume.description ? 
+  this.description = volume.description : 
+  this.description = 'No Description Provided';
 
-  volume.imageLinks.thumbnail ? this.image_url = volume.imageLinks.thumbnail : this.image_url = "img/no-cover.png";
+  volume.imageLinks.thumbnail ? 
+  this.image_url = volume.imageLinks.thumbnail : 
+  this.image_url = "img/no-cover.png";
   
-  volume.industryIdentifiers[0].type ? this.isbnType = volume.industryIdentifiers[0].type : this.isbnType = '';
+  volume.industryIdentifiers[0].type ? 
+  this.isbn_type = volume.industryIdentifiers[0].type : 
+  this.isbn_type = '';
 
-  volume.industryIdentifiers[0].identifier ? this.isbnNumber = volume.industryIdentifiers[0].identifier : this.isbnNumber = 'Unknown ISBN';
+  volume.industryIdentifiers[0].identifier ? 
+  this.isbn_number = volume.industryIdentifiers[0].identifier : 
+  this.isbn_number = 'Unknown ISBN';
 }

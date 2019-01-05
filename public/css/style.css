@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Righteous');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
 /* ================ */
 /* ======BASE====== */
@@ -16,7 +17,7 @@ html, main {
 
 header {
   width: 100%;
-  height: 65px;
+  height: 120px;
   background-color: rgb(57, 129, 129);
   border: 1px solid black;
   position: fixed;
@@ -25,16 +26,16 @@ header {
 
 div.current-page {
   position: fixed;
-  top: 65px;
+  top: 120px;
   z-index: 10;
   width: 100%;
-  height: 30px;
+  height: 45px;
   border: 1px solid black;
 }
 
 main {
   position: relative;
-  top: 110px;
+  top: 175px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -50,12 +51,12 @@ main {
 
 header > h1 {
   font-family: "Righteous", sans-serif;
-  font-size: 30px;
+  font-size: 48px;
   text-align: center;
 }
 
 header nav {
-  margin: 10px auto 0 auto;
+  margin: 20px auto 0 auto;
   width: 100%;
   text-align: center;
 }
@@ -66,7 +67,8 @@ header nav ul li {
 }
 
 header nav ul li a {
-  font-size: 16px;
+  font-size: 24px;
+  font-family: "Raleway", sans-serif;
   text-decoration: none;
   transition: all 1s ease;
 }
@@ -81,17 +83,18 @@ div.current-page {
 
 div.current-page h2 {
   font-family: "Righteous", sans-serif;
-  font-size: 18px;
+  font-size: 30px;
   text-align: center;
   margin-top: 5px;
 }
 
 div.result {
-  width: 300px;
+  min-width: 300px;
+  max-width: 500px;
   border: 1px solid black;
   border-radius: 5px;
   margin: 0 10px 15px 10px;
-  padding: 10px;
+  padding: 30px;
   box-sizing: border-box;
   box-shadow: 1px 2px 2px rgb(42, 42, 42);
   background-color: rgb(89, 158, 158);
@@ -105,7 +108,7 @@ div.result h3 {
 }
 
 div.result h4 {
-  font-family: "Righteous", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 18px;
   text-align: center;
   font-style: italic;
@@ -119,15 +122,38 @@ div.result img {
   box-shadow: 2px 4px 4px rgb(42, 42, 42);
 }
 
-div.result button {
+div.result button, 
+form.new button {
   display: block;
-  margin: 0 auto 10px auto;
+  font-size: 18px;
+  font-family: "Raleway", sans-serif;
+  height: 45px;
+  width: 150px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px auto 10px auto;
   background-color: rgb(174, 207, 207);
+  box-shadow: 1px 2px 2px black;
+  transition: all .5s ease;
 }
 
+  div.result button:hover, 
+  form.new button:hover {
+    background-color: rgb(126, 209, 177);
+    box-shadow: 2px 4px 4px black;
+    }
+
+  div.result button:active, 
+  form.new button:active {
+    position: relative;
+    top: 2px;
+    box-shadow: none;
+  }
+
 div.result p {
-  font-family: sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 18px;
+  line-height: 1.4;
   text-align: justify;
   margin: 0 10px 10px 10px;
 }
@@ -145,9 +171,18 @@ div.result a:hover {
   color: white;
 }
 
+div#identity {
+  font-style: italic;
+  margin: 30px auto 30px auto;
+}
+
+div#identity p {
+  display: block;
+}
+
 form.new {
   width: 400px;
-  margin: auto;
+  margin: 30px auto 0 auto;
 }
 
 form.new input.text {
@@ -156,6 +191,7 @@ form.new input.text {
   width: 350px;
   margin: 15px auto 20px auto;
   font-size: 18px;
+  font-family: "Raleway", sans-serif;
 }
 
 form.new button {
@@ -167,30 +203,33 @@ form.new button {
 fieldset {
   width: 350px;
   margin: auto;
+  font-size: 18px;
 }
 
 .radio {
-  margin: 10px 0 10px 0;
+  margin: 10px 0 30px 10px;
 }
 
 label span {
-  font-size: 18px;
-  margin-left: 15px;
+  margin: 0 10px 0 10px;
 }
 
 .edit {
   display: none;
   margin: auto;
+  font-size: 18px;
+  font-family: "Raleway", sans-serif;
 }
 
-
-
-
-
-/*
-.isbn {
-  font-size: 10px;
-  font-style: italic;
-  background-color: rgb(89, 158, 158);
+input.edit {
+  height: 30px;
+  width: 240px;
+  margin-bottom: 5px;
 }
-*/
+
+textarea.edit {
+  height: 240px;
+  width: 240px;
+  margin-bottom: 5px;
+}
+
