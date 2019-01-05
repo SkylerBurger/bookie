@@ -4,8 +4,8 @@ CREATE TABLE books (
   id SERIAL PRIMARY KEY,
   author VARCHAR(255),
   title VARCHAR(255),
-  isbnType VARCHAR(255),
-  isbnNumber VARCHAR(255),
+  isbn_type VARCHAR(255),
+  isbn_number VARCHAR(255),
   image_url VARCHAR(255),
   description TEXT,
   bookshelf VARCHAR(255)
@@ -14,8 +14,8 @@ CREATE TABLE books (
 INSERT INTO books (
   author,
   title,
-  isbnType,
-  isbnNumber,
+  isbn_type,
+  isbn_number,
   image_url,
   description,
   bookshelf
@@ -33,8 +33,8 @@ INSERT INTO books (
 INSERT INTO books (
   author,
   title,
-  isbnType,
-  isbnNumber,
+  isbn_type,
+  isbn_number,
   image_url,
   description,
   bookshelf

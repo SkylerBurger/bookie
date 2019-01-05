@@ -46,7 +46,8 @@ app.post('/searches', search);
 app.post('/save', saveBook);
 app.get('/books/:books_id', bookDetail);
 app.delete('/books/:books_id', deleteBook);
-app.get('/info/:books_id', infoDetail);
+app.get('/update/:books_id', editBook);
+app.put('/update/:books_id', updateBook)
 
 //==========
 // Functions
@@ -66,15 +67,32 @@ function form(request, response) {
   response.render('pages/searches/new');
 }
 
-function infoDetail (request, response) {
+function editBook(request, response) {
+  let shelfSQL = 'SELECT DISTINCT bookshelf FROM books';
+  let shelfData = [];
+  client.query(shelfSQL)
+    .then(result => {
+      shelfData = [...result.rows];
+    })
+    .catch(err => console.error(err));
+
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.books_id];
-
+  
   return client.query(SQL,values)
-    .then(data => {
-      response.render('pages/books/edit', {details: data.rows[0]});
-    })
-    .catch(err => response.render('pages/error', {err}));
+  .then(data => {
+    response.render('pages/books/edit', {details: data.rows[0], shelves: shelfData});
+  })
+  .catch(err => response.render('pages/error', {err}));
+}
+
+function updateBook(request, response){
+  // let SQL2 = 'SELECT DISTINCT bookshelf FROM books;';
+  // let bookData = client.query(SQL,values);
+  // let bookshelves = client.query(SQL2,[]);
+  // console.log(bookshelves.rows[0]);
+  // return response.render('/pages/books/detail', {details: bookData.rows[0], shelves: bookshelves.rows[0]});
+
 }
 
 function search(request, response){
@@ -91,8 +109,8 @@ function search(request, response){
   return superagent.get(URL)
     .then(result => {
       let books = [];
-      let limit = 40;
-      if(result.body.items.length < 40) limit = result.body.items.length;
+      let limit = 10;
+      if(result.body.items.length < 10) limit = result.body.items.length;
 
       for(let i = 0; i < limit; i++){
         let book = new Book(result.body.items[i]);
@@ -106,10 +124,10 @@ function search(request, response){
 
 function saveBook(request, response){
   let SQL = `INSERT INTO books
-                (title, author, description, image_url, isbnType, isbnNumber)
+                (title, author, description, image_url, isbn_type, isbn_number)
                 VALUES($1, $2, $3, $4, $5, $6)`;
 
-  return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbnType, request.body.isbnNumber])
+  return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbn_type, request.body.isbn_number])
     .then( () => {
       response.render('pages/books/detail', {details: request.body});
     })
@@ -129,7 +147,7 @@ function deleteBook(request, response){
 function bookDetail(request, response) {
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.books_id];
-
+  
   return client.query(SQL, values)
     .then(data => {
       response.render('pages/books/detail', {details: data.rows[0]});
@@ -146,18 +164,30 @@ app.listen(PORT, () => console.log(`APP is up on Port: ${PORT}`));
 const Book = function(data) {
   let volume = data.volumeInfo;
   
-  volume.title ? this.title = volume.title : this.title = "Untitled";
+  volume.title ? 
+  this.title = volume.title : 
+  this.title = "Untitled";
 
-  volume.authors ? this.author = volume.authors.reduce((accum, auth) => {
+  volume.authors ? 
+  this.author = volume.authors.reduce((accum, auth) => {
     accum += auth + ' ';
     return accum;
-  }, '') : this.author = 'Unknown';
+  }, '') : 
+  this.author = 'Unknown';
 
-  volume.description ? this.description = volume.description : this.description = 'No Description Provided';
+  volume.description ? 
+  this.description = volume.description : 
+  this.description = 'No Description Provided';
 
-  volume.imageLinks.thumbnail ? this.image_url = volume.imageLinks.thumbnail : this.image_url = "img/no-cover.png";
+  volume.imageLinks.thumbnail ? 
+  this.image_url = volume.imageLinks.thumbnail : 
+  this.image_url = "img/no-cover.png";
   
-  volume.industryIdentifiers[0].type ? this.isbnType = volume.industryIdentifiers[0].type : this.isbnType = '';
+  volume.industryIdentifiers[0].type ? 
+  this.isbn_type = volume.industryIdentifiers[0].type : 
+  this.isbn_type = '';
 
-  volume.industryIdentifiers[0].identifier ? this.isbnNumber = volume.industryIdentifiers[0].identifier : this.isbnNumber = 'Unknown ISBN';
+  volume.industryIdentifiers[0].identifier ? 
+  this.isbn_number = volume.industryIdentifiers[0].identifier : 
+  this.isbn_number = 'Unknown ISBN';
 }
