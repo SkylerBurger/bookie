@@ -14,6 +14,8 @@
         <form action="/update/<%= details.id %>" method="POST">
           <h3 class="update">Update Info</h3>
 
+          <input type="hidden" name="id" value="<%= details.id %>">
+
           <input name="title" type="text" value="<%= details.title %>" placeholder="Title" class="update"/>
           
           <input name="author" type="text" value="<%= details.author %>" placeholder="Author" class="update"/>
@@ -23,6 +25,8 @@
 
           <textarea name="description" placeholder="Description" class="update"><%= details.description %></textarea>
           
+          <input name="isbn_type" type="text" value="<%= details.isbn_type %>" placeholder="ISBN Type" class="update"/>
+
           <input name="isbn_number" type="text" value="<%= details.isbn_number %>" placeholder="ISBN Number" class="update"/>
           
           <select name="bookshelf" class="update">
