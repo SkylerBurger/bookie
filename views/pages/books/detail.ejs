@@ -13,17 +13,21 @@
     
     <main>
       <div class="result">
+        
         <h3><%= details.title %></h3>
         <h4>By: <%= details.author %></h4>
         <img src=<%= details.image_url %>>
         <p><%= details.description %></p>
+        
         <div id="identity">
             <p>ISBN: <%= details.isbn_number %></p>
             <p>SHELF: <%= details.bookshelf %></p>
         </div>
+
         <form action="/update/<%= details.id %>" method="PUT">
           <button type="submit">Update Book</a>
         </form>
+      
       </div>  
     </main>
 
