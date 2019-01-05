@@ -34,7 +34,7 @@ app.get('/form', form);
 app.post('/searches', search);
 app.post('/save', saveBook);
 app.get('/books/:books_id', bookDetail);
-app.get('/info/:books_id', infoDetail);
+app.get('/update/:books_id', updateBook);
 
 //==========
 // Functions
@@ -54,9 +54,15 @@ function form(request, response) {
   response.render('pages/searches/new');
 }
 
-function infoDetail (request, response) {
+function updateBook (request, response) {
+  console.log('something???')
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.books_id];
+  // let SQL2 = 'SELECT DISTINCT bookshelf FROM books;';
+  // let bookData = client.query(SQL,values);
+  // let bookshelves = client.query(SQL2,[]);
+  // console.log(bookshelves.rows[0]);
+  // return response.render('/pages/books/detail', {details: bookData.rows[0], shelves: bookshelves.rows[0]});
 
   return client.query(SQL,values)
     .then(data => {
@@ -107,13 +113,14 @@ function saveBook(request, response){
 function bookDetail(request, response) {
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.books_id];
-
+  
   return client.query(SQL, values)
     .then(data => {
       response.render('pages/books/detail', {details: data.rows[0]});
     })
     .catch(err => response.render('pages/error', {err}));
 }
+
 
 app.listen(PORT, () => console.log(`APP is up on Port: ${PORT}`));
 
