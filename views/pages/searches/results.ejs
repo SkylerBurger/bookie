@@ -43,7 +43,6 @@
       <script>
         $('.editForm').on('click', function() {
           let selectionClass = "." + $(this).val();
-          console.log(selectionClass);
           $(this).hide();
           $(`${selectionClass}`).css('display', 'block');
         });

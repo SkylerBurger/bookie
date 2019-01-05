@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Righteous');
+@import url('https://fonts.googleapis.com/css?family=Oswald:700');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
 /* ================ */
@@ -50,7 +50,8 @@ main {
 
 
 header > h1 {
-  font-family: "Righteous", sans-serif;
+  font-family: "Oswald", sans-serif;
+  font-weight: bold;
   font-size: 48px;
   text-align: center;
 }
@@ -82,7 +83,8 @@ div.current-page {
 }
 
 div.current-page h2 {
-  font-family: "Righteous", sans-serif;
+  font-family: "Oswald", sans-serif;
+  font-weight: bold;
   font-size: 30px;
   text-align: center;
   margin-top: 5px;
@@ -101,9 +103,11 @@ div.result {
 }
 
 div.result h3 {
-  font-family: "Righteous", sans-serif;
+  font-family: "Oswald", sans-serif;
+  font-weight: bold;
   font-size: 24px;
   text-align: center;
+  line-height: 1.4;
   margin-bottom: 10px;
 }
 
@@ -275,7 +279,8 @@ select.update {
 }
 
 h3.update {
-  font-family: "Righteous", sans-serif;
+  font-family: "Oswald", sans-serif;
+  font-weight: bold;
   font-size: 24px;
   text-align: center;
   margin-bottom: 10px;
