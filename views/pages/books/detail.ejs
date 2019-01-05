@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="../css/style.css">
-  <title>Book Detail</title>
-</head>
-<body>
-  <%- include('../../partials/menu.ejs') %>
-  <div class="current-page"><h2>Book Detail</h2></div>
-  <main>
-    <div class="result">
-      <h3><%= details.title %></h3>
-      <h4>By: <%= details.author %></h4>
-      <img src=<%= details.image_url %>>
-      <p><%= details.description %></p>
-      <div id="identity">
-          <p>ISBN: <%= details.isbn_number %></p>
-          <p>SHELF: <%= details.bookshelf %></p>
-      </div>
-      <a href="/info/<%= details.id%>">Update Book</a>
-    </div>
-  </main>
-  
-</body>
+
+  <head>
+    <%- include('../../partials/head.ejs') %>
+    <title>Book Detail</title>
+  </head>
+
+  <body>
+
+    <%- include('../../partials/menu.ejs') %>
+    <div class="current-page"><h2>Book Detail</h2></div>
+    
+    <main>
+      <div class="result">
+        <h3><%= details.title %></h3>
+        <h4>By: <%= details.author %></h4>
+        <img src=<%= details.image_url %>>
+        <p><%= details.description %></p>
+        <div id="identity">
+            <p>ISBN: <%= details.isbn_number %></p>
+            <p>SHELF: <%= details.bookshelf %></p>
+        </div>
+        <a href="/info/<%= details.id%>">Update Book</a>
+      </div>  
+    </main>
+
+  </body>
+
 </html>

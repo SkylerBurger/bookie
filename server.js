@@ -121,7 +121,6 @@ function bookDetail(request, response) {
     .catch(err => response.render('pages/error', {err}));
 }
 
-
 app.listen(PORT, () => console.log(`APP is up on Port: ${PORT}`));
 
 //=============
