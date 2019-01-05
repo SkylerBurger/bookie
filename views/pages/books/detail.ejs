@@ -24,7 +24,14 @@
             <p>SHELF: <%= details.bookshelf %></p>
         </div>
 
-        <form action="/update/<%= details.id %>" method="GET">
+        <% let updateID = ''; %>
+        <% if(details.id){ %>
+            <% updateID = details.id; %>
+        <% } else { %>
+            <% updateID = id; %>
+        <% } %>
+
+        <form action="/update/<%= updateID %>" method="GET">
           <button type="submit">Update Book</a>
         </form>
       

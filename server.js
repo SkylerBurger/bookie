@@ -87,12 +87,19 @@ function editBook(request, response) {
 }
 
 function updateBook(request, response){
-  // let SQL2 = 'SELECT DISTINCT bookshelf FROM books;';
-  // let bookData = client.query(SQL,values);
-  // let bookshelves = client.query(SQL2,[]);
-  // console.log(bookshelves.rows[0]);
-  // return response.render('/pages/books/detail', {details: bookData.rows[0], shelves: bookshelves.rows[0]});
+  let data = request.body;
 
+  let SQL = `UPDATE books
+             SET title=$1, author=$2, image_url=$3, description=$4, isbn_type=$5, isbn_number=$6, bookshelf=$7
+             WHERE id=$8`;
+  let values = [data.title, data.author, data.image_url, data.description, data.isbn_type, data.isbn_number, data.bookshelf, data.id];
+
+  return client.query(SQL, values)
+    .then(result => {
+      response.redirect(`/books/${data.id}`);
+    })
+    .catch(err => console.error(err));
+            
 }
 
 function search(request, response){
@@ -124,12 +131,13 @@ function search(request, response){
 
 function saveBook(request, response){
   let SQL = `INSERT INTO books
-                (title, author, description, image_url, isbn_type, isbn_number)
-                VALUES($1, $2, $3, $4, $5, $6)`;
+                (title, author, description, image_url, isbn_type, isbn_number, bookshelf)
+                VALUES($1, $2, $3, $4, $5, $6, $7)
+                RETURNING id`;
 
-  return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbn_type, request.body.isbn_number])
-    .then( () => {
-      response.render('pages/books/detail', {details: request.body});
+  return client.query(SQL, [request.body.title, request.body.author, request.body.description, request.body.image_url, request.body.isbn_type, request.body.isbn_number, request.body.bookshelf])
+    .then( result => {
+      response.render('pages/books/detail', {details: request.body, id: result.rows[0].id});
     })
     .catch(err => console.error(err));
 }
