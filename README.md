@@ -1,133 +1,27 @@
-# Book_App
-An app for books
+# Bookie
 
-## Feature 1: Server-side Rendering:
+**Author**: Skyler Burger and Erik Johnson
+**Version**: 1.4.0
 
-### Estimate of time needed to complete:
- 30 minutes
+## Overview
+Bookie is an application that allows you to search the Google Books API for... books! Find books to add to your collection. Edit or update book details and add them to your bookshelves. You can even delete them from your collection, it's easier than dropping them off at Goodwill!
 
-### Start time:
- 9:40AM
+## Architecture
+- [Node.js](https://nodejs.org/en/): A JavaScript runtime environment and package manager.
+- [Express](https://expressjs.com/): A web application framework for Node.js.
+- [Superagent](https://www.npmjs.com/package/superagent): An HTTP Request library for JavaScript.
+- [EJS](https://ejs.co/): Embedded JavaScript, a templating language for embedding JavaScript within HTML files.
+- [Postgresql](https://www.postgresql.org/): An open-source relational database.
 
-### Finish time:
- 9:52AM
+## Change Log
+12-29-2018 - 1.1.0
+- Basic wireframe and Google Books API search integration complete
 
-### Actual time needed to complete:
- 12 minutes
+01-03-2019 - 1.2.0
+- Postgresql database connected and ability to edit book entries
 
-## Feature 2: Search the Google Books API
+01-04-2019 - 1.3.0
+- Further styling of the EJS views and ability to delete book entries
 
-### Estimate of time needed to complete:
- 30 minutes
-
-### Start time:
- 9:52AM
-
-### Finish time:
- 10:11AM
-
-### Actual time needed to complete:
- 19 minutes
-
-## Feature 3: Display Search Results
-
-### Estimate of time needed to complete:
- 60 minutes
-
-### Start time:
- 10:12AM
-
-### Finish time:
- 10:57AM
-
-### Actual time needed to complete:
-45 minutes
- 
-## Feature 4: Error Handling
-
-### Estimate of time needed to complete:
- 20 minutes
-
-### Start time:
- 10:57AM
-
-### Finish time:
-11:00AM
-
-### Actual time needed to complete:
-3 minutes
-
-## Feature 5: Style the Book Application
-
-### Estimate of time needed to complete:
- 60 minutes
-
-### Start time:
-11:00AM
-
-### Finish time:
-11:40AM
-
-### Actual time needed to complete:
-40 minutes
-
-___________________________________________________________________________________________________________
-
-# Lab 12
-
-## Feature 1: Show all saved books when the application loads
-
-### Estimate of time needed to complete:
- 60 minutes
-
-### Start time:
-13:55
-
-### Finish time:
-15:03
-
-### Actual time needed to complete:
-68 minutes
-
-## Feature 2: Book Detail View
-
-### Estimate of time needed to complete:
-60 minutes
-
-### Start time:
-15:03
-
-### Finish time:
-17:00
-
-### Actual time needed to complete:
-2 hours
-
-## Feature 3: Modifying API-provided Book Details
-
-### Estimate of time needed to complete:
-60 minutes
-
-### Start time:
-17:00
-
-### Finish time:
-
-
-### Actual time needed to complete:
-2 hours
-
-# Lab 13
-
-## Feature 1: Update Book
-
-### Estimate of time needed to complete:
-60 minutes
-
-### Start time:
-18:46
-
-### Finish time:
-
-
-### Actual time needed to complete:
+01-05-2019 - 1.4.0
+- Added ability to update book entries, 
